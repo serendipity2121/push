@@ -32,6 +32,15 @@ mvn -version
 
 ![](doc/16600221432547.jpg)
 
+定时任务文件路径 `src/main/java/work/sajor/wechatpush/job/JobWorker.java`
+
+```java 
+# 七点三十分触发
+@Scheduled(cron = "0 30 7 * * ?")
+
+# 八点触发
+@Scheduled(cron = "0 0 8 * * ?")
+```
 
 ### 启动部署
 
@@ -41,4 +50,21 @@ mvn clean package
 
 # 执行 jar包
 java -jar target/wechat-push-0.0.1-SNAPSHOT.jar
+
+```
+
+也可以将 jar 包上传到服务器上，后台部署。
+
+``` bash 
+# 后台执行
+nohup java -jar wechat-push-0.0.1-SNAPSHOT.jar > wechat.log 2>&1 &
+```
+
+
+### 源码
+
+大家可以先fork到自己的仓库，然后再克隆 [Gitee](https://gitee.com/simeitol-sajor/wechat-push)
+
+``` bash
+git clone https://gitee.com/simeitol-sajor/wechat-push
 ```
