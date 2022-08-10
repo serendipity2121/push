@@ -16,10 +16,13 @@ import work.sajor.wechatpush.service.Pusher;
 
 @RestController
 public class PushController {
-    //要推送的用户openid
+    /**
+     * 要推送的用户openid
+     */
     @Value("${target.openId}")
-    private String mxp;
-    private String zyd = "odbd-6U6ygdSTCwldsJ6qs0kxXeA";
+    private String target;
+    @Value("${target.test.openId}")
+    private String testTarget;
 
     @Autowired
     Pusher pusherService;
@@ -30,15 +33,15 @@ public class PushController {
      */
     @GetMapping("/push")
     public void push() {
-        pusherService.push(mxp);
+        pusherService.push(target);
     }
 
     /**
      * 微信测试账号推送
      * */
-    @GetMapping("/push/zyd")
-    public void pushZyd() {
-//        Pusher.push(zyd);
+    @GetMapping("/push/test")
+    public void pushTest() {
+        pusherService.push(testTarget);
     }
 
 
@@ -47,6 +50,6 @@ public class PushController {
      * */
     @GetMapping("/push/{id}")
     public void pushId(@PathVariable("id") String id) {
-//        Pusher.push(id);
+        pusherService.push(id);
     }
 }

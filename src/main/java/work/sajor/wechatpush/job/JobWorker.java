@@ -14,7 +14,9 @@ import work.sajor.wechatpush.service.Pusher;
  */
 @Component
 public class JobWorker {
-    //要推送的用户openid
+    /**
+     * 要推送的用户openid
+     */
     @Value("${target.openId}")
     private String openId;
 

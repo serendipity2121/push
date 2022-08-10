@@ -2,8 +2,8 @@ PACKAGES := "push"
 
 .PHONY: build
 build:
-	mvn clean package
+	docker build . -f Dockerfile --tag sajor:wechat-push
 
 .PHONY: run
 run:
-	java -jar target/wechat-push-0.0.1-SNAPSHOT.jar
+	docker run --name wechat-push -d -p9999:9999 wechat-push
