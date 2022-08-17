@@ -83,9 +83,9 @@
 
 ![](doc/16607188075943.jpg)
 
-想看日志，也可以用命令启动。
+想看日志，也可以用命令启动。在当前target文件夹，按住shift，点击鼠标右键，选择使用powershell打开。
 
-```java -jar target/wechat-push-0.0.1-SNAPSHOT.jar```
+```java -jar wechat-push-0.0.1-SNAPSHOT.jar```
 
 ![](doc/16600611685997.jpg)
 
@@ -106,4 +106,4 @@
 
 欢迎大家关注我新注册的微信公众号，关注的同学多了，以后我可能拓展出加更有趣的功能。
 
-![](qrcode_for_gh_4b2bc81b1b42_258.jpg)
+![](doc/qrcode_for_gh_4b2bc81b1b42_258.jpg)
