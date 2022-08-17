@@ -1,10 +1,24 @@
 # 微信每日早安推送 简单部署一键启动
 
-本文来自 [小红书大佬七夕节的礼物](http://t.csdn.cn/gzC6Z) 原版大佬的代码，配置有些分散，我将其统一转移到了配置文件中，方便配置。打包部署遇到了些问题，这边修改了一下。也增加了docker启动，简化部署。
+下面介绍windows版，且无法安装docker的同学，我们安装jdk1.8来启动。
 
-后面将介绍如何在**不安装集成开发环境**的情况下，只做一些网站注册，使用docker将程序运行起来。给心仪的人发送爱的消息。
+不过还是推荐 [csdn博客](http://t.csdn.cn/mMfZf) 在**不安装集成开发环境**的情况，使用docker运行，这种方式。
 
-![](doc/16600613432836.jpg)
+
+### [Gitee](https://gitee.com/simeitol-sajor/wechat-push) 源码
+
+首先大家需要先注册一个属于自己的 [Gitee](https://gitee.com/signup) 账号。
+
+![](doc/16600600303365.jpg)
+
+登陆之后访问这个 [wechat-push](https://gitee.com/simeitol-sajor/wechat-push) 项目，点击 **star** 这步非常重要！(手动狗头)
+
+![img.png](doc/img.png)
+
+之后点右上角fork到自己的仓库，不需要克隆到本地。
+
+![](doc/16600600806331.jpg)
+
 
 ### API申请
 
@@ -16,15 +30,15 @@
 以及最重要的[微信测试账号](https://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login)
 
 
-### 下载源码
+### 修改统一配置文件
 
-大家将代码下载到本地。项目源码：[wechat-push](https://gitee.com/simeitol-sajor/wechat-push)
+上面账号申请好之后，到码云访问这个文件路径 `src/main/resources/application.properties`找到配置文件，点击编辑。
 
-![](doc/16601012266372.jpg)
+![](doc/16600603138459.jpg)
 
-这个文件路径 `src/main/resources/application.properties`找到配置文件，编辑修改，填入自己刚申请的key。
+按照上面申请好的填入这个配置文件里，之后点击下面的提交按钮。提交信息随便填。
 
-![16600221432547](doc/16600221432547.jpg)
+![](doc/16600603945433.jpg)
 
 
 **定时发送时间**
@@ -36,20 +50,60 @@
 @Scheduled(cron = "0 30 7 * * ?")
 ```
 
+### 构建jar
+
+
+之后我们就进入构建环节了，我们需要点击码云项目上面的流水线。
+
+![](doc/16600606326903.jpg)
+
+
+点击开通，无法开通的需要[验证手机号](https://gitee.com/profile/account_information)
+
+![](doc/16600606023300.jpg)
+
+默认Java即可，选择创建。
+
+![](doc/16600606735508.jpg)
+
+创建好之后，我们选择master分支，执行流水线
+
+![](doc/16600609605502.jpg)
+
+等待流水线执行完毕之后，我们可以点击发布记录，下载构建好的制品。
+
+![](doc/16600610345796.jpg)
+
 
 ### 启动
 
-修改好之后，需要安装docker这一个环境即可。大家可以访问这个[网站](http://get.daocloud.io/) http://get.daocloud.io 在自己电脑上安装docker环境。
+我们需要安装jdk1.8，大家可以在 [这里](https://www.aliyundrive.com/s/X7L3atWivrW) 下载，安装包双击安装到本地就不教学了。
 
-``` bash
-# 构建镜像
-docker build . -f Dockerfile --tag sajor:wechat-push
+可以直接解压之后找到 target/wechat-push-0.0.1-SNAPSHOT.jar，可以直接双击启动
 
-# 启动镜像
-docker run --name wechat-push -d -p9999:9999 wechat-push
+![](doc/16607188075943.jpg)
 
-# 查看运行中容器
-docker ps 
-```
+想看日志，也可以用命令启动。
+
+```java -jar target/wechat-push-0.0.1-SNAPSHOT.jar```
+
+![](doc/16600611685997.jpg)
 
 启动之后，访问本地 `http://127.0.0.1:9999/push` 就可以收到推送了。
+
+查看启动情况：`netstat -ano | findstr 9999`，如图 10824 是项目的进程id
+
+![](doc/16607190291262.jpg)
+
+
+终止项目：`taskkill /f /t /im 10824` 这里10824填自己实际的，过一会儿程序终止，网页就无法访问了。
+
+![](doc/16607191102327.jpg)
+
+
+
+### 最后
+
+欢迎大家关注我新注册的微信公众号，关注的同学多了，以后我可能拓展出加更有趣的功能。
+
+![](qrcode_for_gh_4b2bc81b1b42_258.jpg)
