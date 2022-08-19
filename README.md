@@ -91,9 +91,10 @@
 
 ### 启动
 
-我们需要安装jdk1.8，大家可以在 [这里](https://www.aliyundrive.com/s/X7L3atWivrW) 下载，安装包双击安装到本地就不教学了。
 
-可以直接解压之后找到 target/wechat-push-0.0.1-SNAPSHOT.jar，可以直接双击启动
+直接解压我们下载的制品，之后找到 target/wechat-push-0.0.1-SNAPSHOT.jar，可以直接双击启动。
+
+启动之前需要安装jdk1.8，大家可以在 [这里](https://www.aliyundrive.com/s/X7L3atWivrW) 下载，安装包双击安装到本地就不教学了。
 
 ![](doc/16607188075943.jpg)
 
@@ -104,6 +105,7 @@
 ![](doc/16600611685997.jpg)
 
 启动之后，访问本地 `http://127.0.0.1:9999/push` 就可以收到推送了。
+
 
 查看启动情况：`netstat -ano | findstr 9999`，如图 10824 是项目的进程id
 
