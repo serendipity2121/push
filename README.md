@@ -122,7 +122,7 @@
 没推送出来，首先就要看日志。日志会有错误提示。
 
 - errcode=40037 就是模板`wechat.tamplateId`有问题
-- errcode=40003 就是公众号的信息`wechat.appId or wechat.secret`有问题
+- errcode=40003 就是公众号的信息`wechat.appId or wechat.secret or target.openId`有问题
 - 天气出不来就是 百度天气api 的`weather.ak`有问题，要选服务端，ip用0.0.0.0/0
 
 ### 最后
