@@ -40,16 +40,6 @@ public class Pusher {
     @Value("${target.lianAi}")
     private String lianAi;
     /**
-     * 领证
-     */
-    @Value("${target.linZheng}")
-    private String linZheng;
-    /**
-     * 结婚
-     */
-    @Value("${target.jieHun}")
-    private String jieHun;
-    /**
      * 生日
      */
     @Value("${target.shengRi}")
@@ -70,12 +60,8 @@ public class Pusher {
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser(openId)
                 .templateId(templateId)
-                //.url("https://30paotui.com/")//点击模版消息要访问的网址
                 .build();
-        //3,如果是正式版发送模版消息，这里需要配置你的信息
-        //        templateMessage.addData(new WxMpTemplateData("name", "value", "#FF00FF"));
-        //                templateMessage.addData(new WxMpTemplateData(name2, value2, color2));
-        //填写变量信息，比如天气之类的
+        
         JSONObject todayWeather = tianqiService.getNanjiTianqi();
         templateMessage.addData(new WxMpTemplateData("riqi",todayWeather.getString("date") + "  "+ todayWeather.getString("week"),"#00BFFF"));
         templateMessage.addData(new WxMpTemplateData("tianqi",todayWeather.getString("text_day"),"#00FFFF"));
@@ -85,18 +71,11 @@ public class Pusher {
         templateMessage.addData(new WxMpTemplateData("lianai", JiNianRi.getLianAi(lianAi)+"","#FF1493"));
         templateMessage.addData(new WxMpTemplateData("shengri",JiNianRi.getShengRi(shengRi)+"","#FFA500"));
         templateMessage.addData(new WxMpTemplateData("jinju",CaiHongPi.getJinJu()+"","#C71585"));
-        //templateMessage.addData(new WxMpTemplateData("jiehun",JiNianRi.getJieHun()+""));
-        templateMessage.addData(new WxMpTemplateData("linzhen",JiNianRi.getLinZhen(linZheng)+"","#FF6347"));
         String beizhu = "";
-        if(JiNianRi.getJieHun(jieHun) % 365 == 0){
-            beizhu = "今天是结婚纪念日！";
-        }
         if(JiNianRi.getLianAi(lianAi) % 365 == 0){
             beizhu = "今天是恋爱纪念日！";
         }
-        if(JiNianRi.getLinZhen(linZheng) % 365 == 0){
-            beizhu = "今天是领证纪念日！";
-        }
+       
         templateMessage.addData(new WxMpTemplateData("beizhu",beizhu,"#FF0000"));
 
 
