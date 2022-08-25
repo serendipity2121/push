@@ -38,20 +38,13 @@ public class JiNianRi {
         int day = 0;
         try {
             long time = System.currentTimeMillis() - simpleDateFormat.parse(date).getTime();
-            day = (int) (time / 86400000L);
+            day = (int) (time / 86400000L)+1;
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return day;
     }
 
-    public static int getJieHun(String jieHun) {
-        return before(jieHun);
-    }
-
-    public static int getLinZhen(String linZheng) {
-        return before(linZheng);
-    }
 
     public static int getLianAi(String lianAi) {
         return after(lianAi);
